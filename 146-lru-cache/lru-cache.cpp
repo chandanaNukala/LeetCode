@@ -30,7 +30,6 @@ private:
 public:
     LRUCache(int capacity) {
         cap = capacity;
-        map.clear();
         left = new Node(0, 0);
         right = new Node(0, 0);
         left->next = right;
