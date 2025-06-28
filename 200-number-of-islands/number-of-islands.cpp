@@ -6,14 +6,23 @@ public:
         for(int r=0;r<grid.size();r++){
             for(int c=0;c<grid[0].size();c++){
                 if(grid[r][c]=='1'){
-                    bfs(grid,r,c);
+                    // bfs(grid,r,c);
+                    dfs(grid,r,c);
                     islands++;
                 }
             }
         }
         return islands;
     }
-
+     void dfs(vector<vector<char>>& grid,int r,int c){
+        if(r<0 || c<0 || r>=grid.size() || c>=grid[0].size()|| grid[r][c]=='0'){
+            return;
+        }
+        grid[r][c]='0';
+         for(const auto&d:directions ){
+            dfs(grid,r+d.first,c+d.second);
+         }
+    }
     void bfs(vector<vector<char>>& grid,int r,int c){
         queue<pair<int,int>>q;
         grid[r][c]='0';
