@@ -10,13 +10,12 @@ public:
         // }
         // return {-1,-1};
         unordered_map<int,int>map;
+    
         for(int i=0;i<nums.size();i++){
-            map[nums[i]]=i;
-        }
-        for(int i=0;i<nums.size();i++){
-            if(map.find(target-nums[i])!=map.end() && map[target-nums[i]]!=i){
+            if(map.find(target-nums[i])!=map.end()){
                 return {i,map[target-nums[i]]};
             }
+            map[nums[i]]=i;
         }
         return {-1,-1};
 
