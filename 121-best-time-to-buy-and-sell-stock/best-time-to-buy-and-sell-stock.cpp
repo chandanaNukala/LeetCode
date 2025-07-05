@@ -7,7 +7,10 @@ public:
             if(intital_price>prices[i]){
                 intital_price=prices[i];
             }
-            max_profit=max(max_profit, prices[i]-intital_price);
+            else{
+                max_profit=max(max_profit, prices[i]-intital_price);
+            }
+            
         }
         return max_profit;
     }
