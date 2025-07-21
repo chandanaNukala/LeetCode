@@ -1,45 +1,34 @@
 class Solution {
-  vector<pair<int,int>>directions={{0,1},{0,-1},{1,0},{-1,0}};
 public:
     int numIslands(vector<vector<char>>& grid) {
         int islands=0;
         for(int r=0;r<grid.size();r++){
             for(int c=0;c<grid[0].size();c++){
                 if(grid[r][c]=='1'){
-                    // bfs(grid,r,c);
-                    dfs(grid,r,c);
+                    bfs(r,c,grid);
                     islands++;
                 }
+               
             }
         }
         return islands;
     }
-     void dfs(vector<vector<char>>& grid,int r,int c){
-        if(r<0 || c<0 || r>=grid.size() || c>=grid[0].size()|| grid[r][c]=='0'){
-            return;
-        }
-        grid[r][c]='0';
-         for(const auto&d:directions ){
-            dfs(grid,r+d.first,c+d.second);
-         }
-    }
-    void bfs(vector<vector<char>>& grid,int r,int c){
+    void bfs(int r,int c,vector<vector<char>>& grid){
         queue<pair<int,int>>q;
-        grid[r][c]='0';
         q.push({r,c});
-
+        grid[r][c]='0';
         while(!q.empty()){
-            auto node=q.front();q.pop();
-            int row=node.first,col=node.second;
-
-            for(const auto&d:directions ){
-                int row_temp=row+d.first;
-                int col_temp=col+d.second;
-
-                if(row_temp>=0 && row_temp<grid.size() && col_temp>=0 && col_temp<grid[0].size() && grid[row_temp][col_temp]=='1'){
-                    q.push({row_temp,col_temp});
-                    grid[row_temp][col_temp]='0';
-
+            auto node=q.front();
+            q.pop();
+            int row=node.first;
+            int col=node.second;
+            vector<pair<int,int>>dir={{0,1},{0,-1},{1,0},{-1,0}};
+            for(auto d:dir){
+                int temp_row=row+d.first;
+                int temp_col=col+d.second;
+                if(temp_row<grid.size() && temp_row>=0 && temp_col<grid[0].size() && temp_col>=0 && grid[temp_row][temp_col]=='1'){
+                    q.push({temp_row,temp_col});
+                    grid[temp_row][temp_col]='0';
                 }
             }
         }
